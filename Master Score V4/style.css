@@ -1,0 +1,170 @@
+/* style.css – Styles globaux pour toutes les pages sauf page-spécifiques */
+
+:root {
+  --beige: #e5e0c5;
+  --gris:  #404040;
+  --orange: #ea773a;
+  --orange-pale: #D38439;
+  --vert:  #5dae3e;
+  --bleu:  #1ea4d7;
+  --violet:#a83c9b;
+}
+
+/* Réinitialisation */
+* {
+  margin: 0; padding: 0; box-sizing: border-box;
+}
+html, body {
+  width:100%; height:100%;
+  font-family:'Roboto Mono', monospace;
+  background-color: var(--gris);
+  color: var(--beige);
+}
+
+/* Header commun */
+header.titre {
+  position: relative;
+  background: var(--gris);
+  color: var(--beige);
+  padding: 1rem;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+.home-link {
+  position: absolute; left:20px; top:50%;
+  transform: translateY(-50%);
+  color: var(--beige);
+  text-decoration: none;
+}
+.home-link img {
+  height: 1.5rem;
+  width: auto;
+}
+
+/* Boutons “.simple-button” */
+.simple-button {
+  display: inline-block;
+  background: var(--gris);
+  color: var(--beige);
+  padding: 15px 20px;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color .2s ease;
+}
+.simple-button:hover,
+.simple-button:focus {
+  background: var(--orange-pale);
+  outline: none;
+  box-shadow: none;
+}
+
+/* Navigation principale (accueil, historique) */
+nav.main-nav {
+  margin: 2rem 0;
+}
+nav.main-nav .nav-list {
+  list-style: none;
+}
+nav.main-nav .nav-list li {
+  margin: 10px 0;
+}
+nav.main-nav .simple-button {
+  background: var(--beige);
+  color: var(--gris);
+  width: calc(100% - 40px);
+  margin: 0 auto;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+}
+nav.main-nav .simple-button:hover {
+  background: #dad191;
+}
+
+/* Boîtes beiges réutilisables */
+.box {
+  background: var(--beige);
+  color: var(--gris);
+  padding: 20px;
+  margin: 10px auto;
+  width: calc(100% - 40px);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Nav fixe en bas, commune aux 3 pages */
+/* Bottom-nav – réduite au max avec padding raisonnable */
+nav.bottom-nav {
+  position: fixed;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--beige);
+  padding: 5px 10px;          /* padding réduit */
+  border-radius: 20px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.8);
+  display: flex;
+  gap: 10px;                  /* espacement réduit */
+  justify-content: space-around;
+  width: 250px;                /* s’adapte au contenu */
+  z-index: 100;
+}
+
+nav.bottom-nav a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;                /* taille réduite */
+  height: 50px;
+  border-radius: 8px;         /* rayon d’angle moindre */
+  background-color: var(--beige);
+  transition: background-color 0.2s;
+}
+
+nav.bottom-nav a.active-nav-bar {
+  background-color: var(--gris);
+}
+
+nav.bottom-nav a img {
+  width: 30px;                /* icônes plus petites */
+  height: 30px;
+}
+
+
+/* Désactiver “Reprendre” */
+#reprendre-container.disabled .simple-button {
+  background: #ccc;
+  pointer-events: none;
+  opacity: .6;
+}
+
+/* Responsive général */
+@media (max-width:600px) {
+  nav.main-nav .simple-button,
+  .box {
+    width: calc(100% - 20px);
+  }
+  nav.bottom-nav {
+    width: calc(100% - 20px);
+  }
+}
+
+/* Bouton “Retour” (flèche) remplaçant “Home” */
+.back-link {
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--beige);
+  text-decoration: none;
+}
+.back-link img {
+  height: 1.5rem;
+  width: auto;
+}

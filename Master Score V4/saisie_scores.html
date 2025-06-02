@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Saisie des Scores - Master Score</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="saisie_scores.css">
+</head>
+<body>
+  <header class="titre">
+    <!-- Flèche “Retour” (cachée par défaut) -->
+    <a href="historique.html" class="back-link" style="display:none" aria-label="Retour">
+      <img src="https://img.icons8.com/?size=100&id=vAY1vrhTJgRw&format=png&color=e5e0c5" alt="Retour">
+    </a>
+    <!-- Home classique -->
+    <a href="index.html" class="home-link" aria-label="Accueil">
+      <img src="https://img.icons8.com/?size=100&id=36389&format=png&color=e5e0c5" alt="Accueil">
+    </a>
+    <h1>Saisie des Scores</h1>
+  </header>
+
+  <div class="tool-box">
+    <a class="tool-box-buttons">Tour Précédent</a>
+    <a class="tool-box-buttons">Fin de Partie</a>
+    <a class="tool-box-buttons">Tour Suivant</a>
+  </div>
+
+  <div class="current-turn">
+    Tour <span id="turn-number">1</span> / <span id="turn-total">1</span>
+  </div>
+
+  <!-- Section contenant les cases de saisie par joueur -->
+  <div class="saisie-des-scores-section"></div>
+
+  <nav class="bottom-nav" aria-label="Navigation de la partie">
+    <a href="tableau_scores.html" class="unactive-nav-bar" aria-label="Tableau des scores">
+      <img src="https://img.icons8.com/?size=100&id=61027&format=png&color=404040" alt="Tableau">
+    </a>
+    <a href="saisie_scores.html" class="active-nav-bar" aria-label="Saisie des scores">
+      <img src="https://img.icons8.com/?size=100&id=86725&format=png&color=e5e0c5" alt="Saisie">
+    </a>
+    <a href="statistiques.html" class="unactive-nav-bar" aria-label="Statistiques">
+      <img src="https://img.icons8.com/?size=100&id=59762&format=png&color=404040" alt="Stats">
+    </a>
+  </nav>
+
+  <script src="saisie_scores.js"></script>
+</body>
+</html>

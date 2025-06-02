@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Nouvelle Partie - Master Score</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="nouvelle_partie.css">
+</head>
+<body>
+  <header class="titre">
+    <a href="index.html" class="home-link" aria-label="Retour Accueil">
+      <img src="https://img.icons8.com/?size=100&id=36389&format=png&color=e5e0c5" alt="Accueil">
+    </a>
+    <h1>Nouvelle Partie</h1>
+  </header>
+
+  <div class="box choix-nbr-player">
+    <label for="nbr-players">Nombre de joueurs :</label>
+    <div class="nbr-players">
+      <button id="decr-player">–</button>
+      <span id="nbr-players">1</span>
+      <button id="incr-player">+</button>
+    </div>
+  </div>
+
+  <div class="box" id="players-names"></div>
+
+  <div class="box">
+    <button id="start-game" class="simple-button">Commencer la Partie</button>
+  </div>
+
+  <script src="nouvelle_partie.js"></script>
+</body>
+</html>
