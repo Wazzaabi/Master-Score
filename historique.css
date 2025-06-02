@@ -1,0 +1,60 @@
+/* Spécifique à l’Historique */
+.history-card {
+    background: var(--beige);
+    color: var(--gris);
+    border-radius:20px;
+    padding:1rem;
+    margin:1rem auto;
+    width:calc(100% - 40px);
+  }
+  .history-header {
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:.75rem;
+  }
+  .history-title {
+    font-size:1rem;
+    font-weight:400;
+  }
+  .history-buttons button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-left:.5rem;
+  }
+
+  .history-buttons button.delete-btn {
+    margin-left: 0.5rem;
+  }
+  .history-header .history-buttons img {
+    width: 2em;
+    height: 2em;
+  }
+
+  .history-inner {
+    background: var(--gris);
+    border-radius:10px;
+    padding:1rem;
+    display:grid;
+    grid-template-columns: repeat(2,1fr);
+    gap:.5rem 1rem;
+  }
+  .history-player {
+    display:flex;
+    align-items:center;
+    color: var(--beige);
+  }
+  .history-player .number {
+    background: var(--beige);
+    color: var(--gris);
+    border-radius:50%;
+    width:1.5rem; height:1.5rem;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    margin-right:.5rem;
+  }
+  .player-name { margin-right:.25rem; }
+  .player-score { margin-left:auto; }
+  
