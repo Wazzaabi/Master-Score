@@ -30,6 +30,14 @@ header.titre {
   text-align: center;
   box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
+
+@media only screen and (max-width: 600px) {
+  header.titre {
+    font-size: 0.8rem; /* taille plus petite sur mobile */
+    text-align: end;
+  }
+}
+
 .home-link {
   position: absolute; left:20px; top:50%;
   transform: translateY(-50%);
@@ -112,7 +120,7 @@ nav.bottom-nav {
   display: flex;
   gap: 10px;                  /* espacement réduit */
   justify-content: space-around;
-  width: 250px;                /* s’adapte au contenu */
+  width: 250px;               /* s’adapte au contenu */
   z-index: 100;
 }
 
@@ -136,7 +144,6 @@ nav.bottom-nav a img {
   height: 30px;
 }
 
-
 /* Désactiver “Reprendre” */
 #reprendre-container.disabled .simple-button {
   background: #ccc;
@@ -148,9 +155,6 @@ nav.bottom-nav a img {
 @media (max-width:600px) {
   nav.main-nav .simple-button,
   .box {
-    width: calc(100% - 20px);
-  }
-  nav.bottom-nav {
     width: calc(100% - 20px);
   }
 }

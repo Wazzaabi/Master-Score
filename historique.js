@@ -1,111 +1,82 @@
 // historique.js
 
-// Affiche la liste des parties terminées, avec boutons Éditer / Supprimer
 function loadHistoryPage() {
-  const hist = JSON.parse(localStorage.getItem('history') || '[]');
+  // Récupère l’historique depuis localStorage (tableau d’objets { date, players, scores })
+  const hist = JSON.parse(localStorage.getItem('history')) || [];
   const container = document.getElementById('history-list');
   container.innerHTML = '';
 
-  // Parcours des enregistrements dans l’ordre inverse (du plus récent au plus ancien)
-  hist.slice().reverse().forEach((rec, reverseIdx) => {
-    // Calculer l’index réel dans le tableau initial
-    const origIdx = hist.length - 1 - reverseIdx;
+  // Parcours à l’envers pour afficher la plus récente en premier
+  hist.slice().reverse().forEach((rec, revIdx) => {
+    const origIdx = hist.length - 1 - revIdx;
+    // Formatage de la date en JJ/MM/AA
+    const dateStr = new Date(rec.date)
+      .toLocaleDateString('fr-FR', { day: '2-digit', month: '2-digit', year: '2-digit' });
 
-    const dateStr = new Date(rec.date).toLocaleDateString('fr-FR', {
-      day: '2-digit', month: '2-digit', year: '2-digit'
-    });
-
-    // Création de la carte historique
+    // Création de la carte
     const card = document.createElement('div');
     card.className = 'history-card';
 
-    // En-tête avec titre + boutons
-    const header = document.createElement('div');
-    header.className = 'history-header';
+    // En-tête de la carte
+    const hdr = document.createElement('div');
+    hdr.className = 'history-header';
+    hdr.innerHTML = `
+      <div class="history-title">Rikiki du ${dateStr}</div>
+      <div class="history-buttons">
+        <button class="modify-btn" data-index="${origIdx}" aria-label="Éditer">
+          <img src="assets/icons/edit-32-gris.png" alt="Editer">
+        </button>
+        <button class="delete-btn" data-index="${origIdx}" aria-label="Supprimer">
+          <img src="assets/icons/delete-32-rouge.png" alt="Supprimer">
+        </button>
+      </div>`;
+    card.appendChild(hdr);
 
-    const title = document.createElement('div');
-    title.className = 'history-title';
-    title.textContent = `Partie du ${dateStr}`;
-
-    // Boutons Éditer / Supprimer
-    const buttonsDiv = document.createElement('div');
-    buttonsDiv.className = 'history-buttons';
-
-    // Bouton Éditer
-    const editBtn = document.createElement('button');
-    editBtn.className = 'modify-btn';
-    editBtn.setAttribute('aria-label', 'Éditer');
-    editBtn.innerHTML = '<img src="https://img.icons8.com/?size=100&id=edit&format=png&color=404040" alt="Éditer">';
-    editBtn.dataset.index = origIdx;
-    editBtn.addEventListener('click', () => {
-      // Quand on édite, on stocke dans localStorage l’entrée à modifier
-      localStorage.setItem('historyEditMode', 'true');
-      localStorage.setItem('editHistoryIndex', origIdx);
-
-      // Réinjection des données de la partie dans currentGame / scores / currentTurn
-      localStorage.setItem(
-        'currentGame',
-        JSON.stringify({ players: rec.players })
-      );
-      localStorage.setItem('scores', JSON.stringify(rec.scores));
-      localStorage.setItem('currentTurn', '0');
-
-      // Redirection vers la saisie en mode édition
-      window.location.href = 'saisie_scores.html';
-    });
-
-    // Bouton Supprimer
-    const deleteBtn = document.createElement('button');
-    deleteBtn.className = 'delete-btn';
-    deleteBtn.setAttribute('aria-label', 'Supprimer');
-    deleteBtn.innerHTML = '<img src="https://img.icons8.com/?size=100&id=trash&format=png&color=404040" alt="Supprimer">';
-    deleteBtn.dataset.index = origIdx;
-    deleteBtn.addEventListener('click', () => {
-      hist.splice(origIdx, 1);
-      localStorage.setItem('history', JSON.stringify(hist));
-      loadHistoryPage(); // Rafraîchissement de la liste
-    });
-
-    buttonsDiv.appendChild(editBtn);
-    buttonsDiv.appendChild(deleteBtn);
-    header.appendChild(title);
-    header.appendChild(buttonsDiv);
-
-    // Corps de la carte : liste des joueurs + total
+    // Corps de la carte : liste des joueurs et totaux
     const inner = document.createElement('div');
     inner.className = 'history-inner';
-
     rec.players.forEach((p, i) => {
-      // Calcul du total du joueur i
-      const total = rec.scores.reduce((acc, tour) => acc + (tour[i] || 0), 0);
-
-      const playerDiv = document.createElement('div');
-      playerDiv.className = 'history-player';
-
-      const numSpan = document.createElement('span');
-      numSpan.className = 'number';
-      numSpan.textContent = i + 1;
-
-      const nameSpan = document.createElement('span');
-      nameSpan.className = 'player-name';
-      nameSpan.textContent = p;
-
-      const scoreSpan = document.createElement('span');
-      scoreSpan.className = 'player-score';
-      scoreSpan.textContent = total;
-
-      playerDiv.appendChild(numSpan);
-      playerDiv.appendChild(nameSpan);
-      playerDiv.appendChild(scoreSpan);
-      inner.appendChild(playerDiv);
+      const total = rec.scores.reduce((sum, tour) => sum + (tour[i] || 0), 0);
+      inner.innerHTML += `
+        <div class="history-player">
+          <div class="number">${i + 1}</div>
+          <span class="player-name">${p}</span>
+          <span class="player-score">${total} pts</span>
+        </div>`;
     });
-
-    card.appendChild(header);
     card.appendChild(inner);
+
     container.appendChild(card);
+  });
+
+  // Boutons ÉDITER
+  container.querySelectorAll('.modify-btn').forEach(btn => {
+    btn.addEventListener('click', e => {
+      const rec = hist[+e.currentTarget.dataset.index];
+      // Prépare le mode édition : stocke rec.players et rec.scores
+      localStorage.setItem('historyEditMode', 'true');
+      localStorage.setItem('currentGame', JSON.stringify({ players: rec.players }));
+      localStorage.setItem('scores', JSON.stringify(rec.scores));
+      localStorage.setItem('currentTurn', 0);
+      window.location.href = 'saisie_scores.html';
+    });
+  });
+
+  // Boutons SUPPRIMER (avec confirmation)
+  container.querySelectorAll('.delete-btn').forEach(btn => {
+    btn.addEventListener('click', e => {
+      const idx = +e.currentTarget.dataset.index;
+      const dateStr = new Date(hist[idx].date)
+        .toLocaleDateString('fr-FR', { day: '2-digit', month: '2-digit', year: '2-digit' });
+      const message = `Voulez-vous vraiment supprimer la partie du ${dateStr} ?`;
+      if (confirm(message)) {
+        hist.splice(idx, 1);
+        localStorage.setItem('history', JSON.stringify(hist));
+        loadHistoryPage();
+      }
+    });
   });
 }
 
-window.addEventListener('DOMContentLoaded', () => {
-  loadHistoryPage();
-});
+// Au chargement de la page, on lance l’affichage
+document.addEventListener('DOMContentLoaded', loadHistoryPage);

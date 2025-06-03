@@ -11,29 +11,39 @@
 <body>
   <header class="titre">
     <a href="historique.html" class="back-link" style="display:none" aria-label="Retour">
-      <img src="https://img.icons8.com/?size=100&id=vAY1vrhTJgRw&format=png&color=e5e0c5" alt="Retour">
+      <img src="assets/icons/back-32.png" alt="Retour">
     </a>
     <a href="index.html" class="home-link" aria-label="Accueil">
-      <img src="https://img.icons8.com/?size=100&id=36389&format=png&color=e5e0c5" alt="Accueil">
+      <img src="assets/icons/menu-32-beige.png" alt="Accueil">
     </a>
     <h1>Statistiques</h1>
   </header>
 
-  <div id="kpi-container" class="kpi-container"></div>
-  <div class="graph-container">
-    <canvas id="scoreChart"></canvas>
+  <div class="stats-layout">
+    <div class="kpi-container" id="kpi-container"></div>
+
+    <div class="graph-container">
+      <div class="chart-wrapper">
+        <canvas id="scoreChart"></canvas>
+        <button id="closeChart" class="close-chart" aria-label="Fermer le plein écran"><img src="assets/icons/compress-32-gris.png" alt="compress"></button>
+        <button id="toggleTheme" class="toggle-theme" aria-label="Basculer thème"><img src="assets/icons/dark-32-gris.png" alt="Dark"></button>
+      </div>
+    </div>
+
+    <div class="ranking" id="ranking">
+      <h3>Classement final</h3>
+    </div>
   </div>
-  <div id="ranking" class="ranking"><h3>Classement final</h3></div>
 
   <nav class="bottom-nav" aria-label="Navigation de la partie">
     <a href="tableau_scores.html" class="unactive-nav-bar" aria-label="Tableau">
-      <img src="https://img.icons8.com/?size=100&id=61027&format=png&color=404040" alt="Tableau">
+      <img src="assets/icons/table-32-gris.png" alt="Tableau">
     </a>
     <a href="saisie_scores.html" class="unactive-nav-bar" aria-label="Saisie">
-      <img src="https://img.icons8.com/?size=100&id=86725&format=png&color=404040" alt="Saisie">
+      <img src="assets/icons/edit-32-gris.png" alt="Saisie">
     </a>
-    <a href="statistiques.html" class="active-nav-bar" aria-label="Statistiques">
-      <img src="https://img.icons8.com/?size=100&id=59762&format=png&color=e5e0c5" alt="Stats">
+    <a href="statistiques.html" class="active-nav-bar" aria-label="Stats">
+      <img src="assets/icons/chart-32-beige.png" alt="Stats">
     </a>
   </nav>
 
