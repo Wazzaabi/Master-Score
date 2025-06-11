@@ -29,6 +29,9 @@ function loadHistoryPage() {
         <button class="delete-btn" data-index="${origIdx}" aria-label="Supprimer">
           <img src="assets/icons/delete-32-rouge.png" alt="Supprimer">
         </button>
+        <button class="share-btn" data-index="${origIdx}" aria-label="Partager">
+          <span class="share-emoji">📤</span>
+        </button>
       </div>`;
     card.appendChild(hdr);
 
@@ -73,6 +76,33 @@ function loadHistoryPage() {
         hist.splice(idx, 1);
         localStorage.setItem('history', JSON.stringify(hist));
         loadHistoryPage();
+      }
+    });
+  });
+
+  // Boutons PARTAGER
+  container.querySelectorAll('.share-btn').forEach(btn => {
+    btn.addEventListener('click', e => {
+      const idx = +e.currentTarget.dataset.index;
+      const rec = hist[idx];
+      const dateStr = new Date(rec.date)
+        .toLocaleDateString('fr-FR', { day: '2-digit', month: '2-digit', year: '2-digit' });
+      const totals = rec.players.map((_, i) =>
+        rec.scores.reduce((sum, t) => sum + (t[i] || 0), 0)
+      );
+      const text = `Rikiki du ${dateStr}\n` +
+        rec.players.map((p, i) => `${p} : ${totals[i]} pts`).join('\n');
+      if (navigator.share) {
+        navigator.share({
+          title: `Résultats du Rikiki du ${dateStr}`,
+          text
+        }).catch(() => {});
+      } else if (navigator.clipboard) {
+        navigator.clipboard.writeText(text).then(() => {
+          alert('Statistiques copiées dans le presse-papiers');
+        });
+      } else {
+        alert(text);
       }
     });
   });
