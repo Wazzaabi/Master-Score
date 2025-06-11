@@ -24,6 +24,11 @@
     margin-left:.5rem;
   }
 
+  .history-buttons button.share-btn {
+    font-size: 2em;
+    line-height: 1;
+  }
+
   .history-buttons button.delete-btn {
     margin-left: 0.5rem;
   }
