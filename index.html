@@ -1,32 +1,152 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1.0">
-  <title>Master Score - Accueil</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Accueil</title>
+  <script>
+    (() => {
+      const theme = localStorage.getItem("theme") || "light";
+      document.documentElement.classList.add(theme);
+    })();
+  </script>
+
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/header.css" />
+  <link rel="stylesheet" href="css/navbar.css" />
+  <link rel="stylesheet" href="css/pages/accueil.css" />
 </head>
 <body>
-  <header class="titre">
-    <h1>Master Score</h1>
-  </header>
+  <header id="header"></header>
+  <main style="padding-bottom: 100px;">
+    <div>
+      <a href="#" id="start-new-game" class="simple-button">Nouvelle Partie</a>
+    </div>
+    <div>
+      <a href="saisie_scores.html" class="simple-button">Reprendre</a>
+    </div>
 
-  <nav class="main-nav" aria-label="Navigation principale">
-    <ul class="nav-list">
-      <li>
-        <a href="nouvelle_partie.html" class="simple-button">Nouvelle Partie</a>
-      </li>
-      <li id="reprendre-container">
-        <a href="saisie_scores.html" class="simple-button">Reprendre</a>
-        <div class="box-info"></div>
-      </li>
-      <li>
-        <a href="historique.html" class="simple-button">Historique</a>
-      </li>
-    </ul>
-  </nav>
+    <section>
+      <h3 style="text-align:center; margin: 1rem 0;">Historique des parties :</h3>
+      <div id="history-list"></div>
+    </section>
 
-  <!-- Référence au fichier JS renommé -->
-  <script src="script.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const hist = JSON.parse(localStorage.getItem('history')) || [];
+        const container = document.getElementById('history-list');
+        container.innerHTML = '';
+
+        hist.slice().reverse().forEach((rec, revIdx) => {
+          const origIdx = hist.length - 1 - revIdx;
+          const dateStr = new Date(rec.date).toLocaleDateString('fr-FR', { day:'2-digit', month:'2-digit', year:'2-digit' });
+
+          const card = document.createElement('div');
+          card.className = 'history-card';
+
+          const hdr = document.createElement('div');
+          hdr.className = 'history-header';
+          hdr.innerHTML = `
+            <div class="history-title">Rikiki du ${dateStr}</div>
+            <div class="history-buttons">
+              <button class="modify-btn" data-index="${origIdx}" aria-label="Éditer">
+                <img class="nav-icon" data-icon-name="edit" src="assets/icons/edit-32-beige.png" alt="Éditer" />
+              </button>
+              <button class="delete-btn" data-index="${origIdx}" aria-label="Supprimer">
+                <img class="nav-icon" data-icon-name="delete" src="assets/icons/delete-32-beige.png" alt="Supprimer" />
+              </button>
+            </div>`;
+          card.appendChild(hdr);
+
+          const inner = document.createElement('div');
+          inner.className = 'history-inner';
+          rec.players.forEach((p, i) => {
+            const total = rec.scores.reduce((s, t) => s + (t[i] || 0), 0);
+            inner.innerHTML += `
+              <div class="history-player">
+                <div class="number">${i + 1}</div>
+                <span class="player-name">${p}</span>
+                <span class="player-score">${total}</span>
+              </div>`;
+          });
+          card.appendChild(inner);
+          container.appendChild(card);
+        });
+
+        // Actions
+        container.querySelectorAll('.modify-btn').forEach(btn => {
+          btn.addEventListener('click', e => {
+            const rec = hist[+e.currentTarget.dataset.index];
+
+            if (localStorage.getItem('currentGame')) {
+              alertManager.show({
+                message: "Une partie est déjà en cours. Si vous modifiez une ancienne partie, celle en cours sera sauvegardée.",
+                confirmText: "Continuer",
+                cancelText: "Annuler",
+                onConfirm: () => {
+                  const scores = JSON.parse(localStorage.getItem('scores') || '[]');
+                  const players = JSON.parse(localStorage.getItem('currentGame')).players;
+                  const history = JSON.parse(localStorage.getItem('history') || '[]');
+                  history.push({ date: new Date().toISOString(), players, scores });
+                  localStorage.setItem('history', JSON.stringify(history));
+
+                  localStorage.setItem('historyEditMode', 'true');
+                  localStorage.setItem('currentGame', JSON.stringify({ players: rec.players }));
+                  localStorage.setItem('scores', JSON.stringify(rec.scores));
+                  localStorage.setItem('currentTurn', 0);
+                  window.location.href = 'saisie_scores.html';
+                }
+              });
+            } else {
+              localStorage.setItem('historyEditMode', 'true');
+              localStorage.setItem('currentGame', JSON.stringify({ players: rec.players }));
+              localStorage.setItem('scores', JSON.stringify(rec.scores));
+              localStorage.setItem('currentTurn', 0);
+              window.location.href = 'saisie_scores.html';
+            }
+          });
+        });
+
+
+
+        container.querySelectorAll('.delete-btn').forEach(btn => {
+          btn.addEventListener('click', e => {
+            const idx = +e.currentTarget.dataset.index;
+
+            alertManager.show({
+              message: "Souhaitez-vous vraiment supprimer cette partie ? Cette action est irréversible.",
+              confirmText: "Supprimer",
+              cancelText: "Annuler",
+              onConfirm: () => {
+                hist.splice(idx, 1);
+                localStorage.setItem('history', JSON.stringify(hist));
+                location.reload();
+              }
+            });
+          });
+        });
+
+
+      });
+    </script>
+
+    <div id="alert-overlay" class="overlay hidden">
+      <div class="custom-alert box">
+        <p id="alert-message">Message</p>
+        <div style="margin-top: 1rem; display: flex; justify-content: center; gap: 1rem;">
+          <button class="simple-button" id="alert-confirm">Continuer</button>
+          <button class="simple-button" id="alert-cancel">Annuler</button>
+        </div>
+      </div>
+    </div>
+    <script src="alertManager.js"></script>
+  </main>
+  <nav id="navbar"></nav>
+  <script src="js/main.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/darkmode.js"></script>
+  <script src="js/header.js"></script>
+  <script src="js/navbar.js"></script>
+  <script src="js/pages/accueil.js"></script>
 </body>
 </html>

@@ -1,0 +1,29 @@
+#header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  border-bottom-right-radius: 20px;
+  border-bottom-left-radius: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+#header .logo img {
+  width: 180px; /* Taille de l'image du logo */
+  height: auto; /* Hauteur automatique pour conserver les proportions */
+}
+
+#theme-toggle {
+  width: 60px;
+  height: auto;
+}
+
+@media (max-width: 600px) {
+  #header .logo img {
+    width: 100px; /* Taille réduite pour mobile */
+  }
+
+  #theme-toggle {
+    width: 40px; /* Taille réduite pour mobile */
+  }
+}

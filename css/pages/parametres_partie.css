@@ -1,0 +1,55 @@
+/* Styles spécifiques à la page parametres_partie */
+
+.choix-nbr-player,
+.info-player {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.nbr-players {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.nbr-players button {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+.info-player input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--gris);
+  padding: 5px;
+  color: var(--texte-bouton);
+  font-size: 1rem;
+}
+
+
+.box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    background: var(--fond-bouton);
+    color: var(--texte-bouton);
+    padding: 20px;
+    margin: 20px;
+    border-radius: 10px;
+}
+
+.simple-button {
+    position: absolute;
+    border-radius:20px;
+    padding: 20px;
+    width: 200px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--orange-pale);
+    color: var(--texte-bouton);
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+}

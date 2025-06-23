@@ -1,0 +1,53 @@
+:root {
+  --beige: #e5e0c5;
+  --gris: #404040;
+  --orange-pale: #D38439;
+  --rouge: #c33;
+}
+
+html.light {
+  --fond-principal: var(--beige);
+  --texte-principal: var(--gris);
+  --fond-nav: var(--gris);
+  --fond-bouton: var(--gris);
+  --texte-bouton: var(--beige);
+}
+
+html.dark {
+  --fond-principal: var(--gris);
+  --texte-principal: var(--beige);
+  --fond-nav: var(--beige);
+  --fond-bouton: var(--beige);
+  --texte-bouton: var(--gris);
+}
+
+body {
+  font-family:'Roboto Mono', monospace;
+  margin: 0;
+  background-color: var(--fond-principal);
+  color: var(--texte-principal);
+}
+
+/* Overlay flouté */
+.overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background-color: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+}
+
+/* Boîte d’alerte */
+.custom-alert {
+  max-width: 90%;
+  padding: 2rem;
+  text-align: center;
+}
+
+.hidden {
+  display: none;
+}

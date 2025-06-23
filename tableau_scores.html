@@ -1,53 +1,43 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1.0">
-  <title>Tableau des Scores - Master Score</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="tableau_scores.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tableau Scores</title>
+  <script>
+    (() => {
+      const theme = localStorage.getItem("theme") || "light";
+      document.documentElement.classList.add(theme);
+    })();
+  </script>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/header.css" />
+  <link rel="stylesheet" href="css/navbar.css" />
+  <link rel="stylesheet" href="css/pages/tableau_scores.css" />
 </head>
 <body>
-  <header class="titre">
-    <a href="historique.html" class="back-link" style="display:none" aria-label="Retour">
-      <img src="assets/icons/back-32.png" alt="Retour">
-    </a>
-    <a href="index.html" class="home-link" aria-label="Accueil">
-      <img src="assets/icons/menu-32-beige.png" alt="Accueil">
-    </a>
-    <h1>Tableau des Scores</h1>
-  </header>
+  <header id="header"></header>
+  
+  <main style="padding-bottom: 100px;">
+    <div class="tableau-container">
+      <table id="scoreTable">
+        <thead>
+          <tr id="headerRow"><th>Tour</th></tr>
+        </thead>
+        <tbody id="tableBody"></tbody>
+        <tfoot>
+          <tr id="totalRow"><td>Total</td></tr>
+        </tfoot>
+      </table>
+    </div>
+  </main>
 
-  <div class="tableau-container">
-    <table id="scoreTable">
-      <thead>
-        <tr id="headerRow">
-          <th>Tour</th>
-          <!-- Les colonnes joueurs seront ajoutées dynamiquement -->
-        </tr>
-      </thead>
-      <tbody id="tableBody"></tbody>
-      <tfoot>
-        <tr id="totalRow">
-          <td>Total</td>
-          <!-- Les totaux seront ajoutés dynamiquement -->
-        </tr>
-      </tfoot>
-    </table>
-  </div>
-
-  <nav class="bottom-nav" aria-label="Navigation de la partie">
-    <a href="tableau_scores.html" class="active-nav-bar" aria-label="Tableau">
-      <img src="assets/icons/table-32-beige.png" alt="Tableau">
-    </a>
-    <a href="saisie_scores.html" class="unactive-nav-bar" aria-label="Saisie">
-      <img src="assets/icons/edit-32-gris.png" alt="Saisie">
-    </a>
-    <a href="statistiques.html" class="unactive-nav-bar" aria-label="Statistiques">
-      <img src="assets/icons/chart-32-gris.png" alt="Stats">
-    </a>
-  </nav>
-
-  <script src="tableau_scores.js"></script>
+  <nav id="navbar"></nav>
+  <script src="js/main.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/darkmode.js"></script>
+  <script src="js/header.js"></script>
+  <script src="js/navbar.js"></script>
+  <script src="js/pages/tableau_scores.js"></script>
 </body>
 </html>

@@ -1,0 +1,54 @@
+/* Styles spécifiques à la page tableau_scores */
+
+/* Conteneur beige autour du tableau */
+.tableau-container {
+  background-color: var(--fond-bouton);
+  color: var(--texte-bouton);
+  padding: 0px;
+  margin: 20px;
+  width: calc(100%- 40px);
+  max-height: 400px;
+  border-radius: 10px;
+
+  /* Scroll horizontal si beaucoup de colonnes */
+  overflow: auto;
+}
+
+/* Tableau */
+.tableau-container table {
+    width: 100%;
+  border-collapse: collapse;
+}
+
+.tableau-container th,
+.tableau-container td {
+  border: 1px solid var(--texte-bouton);
+  padding: 0.5rem;
+  text-align: center;
+}
+
+.tableau-container th {
+    position: sticky;
+    top: 0;
+  background-color: var(--orange-pale);
+  z-index: 3;
+}
+
+.tableau-container tfoot td {
+    position: sticky;
+    bottom: 0;
+  font-weight: bold;
+  background-color: var(--orange-pale);
+  z-index: 4;
+}
+
+.tableau-container td:first-child {
+    position: sticky;
+    left: 0;
+    background-color: var(--orange-pale);
+    z-index: 2;
+}
+
+.main {
+  display: flex;
+}

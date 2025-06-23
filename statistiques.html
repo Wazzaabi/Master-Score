@@ -1,32 +1,38 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1.0">
-  <title>Statistiques - Master Score</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="statistiques.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Statistiques</title>
+  <script>
+    (() => {
+      const theme = localStorage.getItem("theme") || "light";
+      document.documentElement.classList.add(theme);
+    })();
+  </script>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/header.css" />
+  <link rel="stylesheet" href="css/navbar.css" />
+  <link rel="stylesheet" href="css/pages/statistiques.css" />
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-  <header class="titre">
-    <a href="historique.html" class="back-link" style="display:none" aria-label="Retour">
-      <img src="assets/icons/back-32.png" alt="Retour">
-    </a>
-    <a href="index.html" class="home-link" aria-label="Accueil">
-      <img src="assets/icons/menu-32-beige.png" alt="Accueil">
-    </a>
-    <h1>Statistiques</h1>
-  </header>
+  <header id="header"></header>
 
-  <div class="stats-layout">
+
+  <main>
+    <div class="stats-layout">
     <div class="kpi-container" id="kpi-container"></div>
 
     <div class="graph-container">
       <div class="chart-wrapper">
         <canvas id="scoreChart"></canvas>
-        <button id="closeChart" class="close-chart" aria-label="Fermer le plein écran"><img src="assets/icons/compress-32-gris.png" alt="compress"></button>
-        <button id="toggleTheme" class="toggle-theme" aria-label="Basculer thème"><img src="assets/icons/dark-32-gris.png" alt="Dark"></button>
+        <button id="closeChart" class="close-chart" aria-label="Fermer le plein écran">
+          <img src="assets/icons/compress-32-gris.png" alt="compress">
+        </button>
+        <button id="toggleTheme" class="toggle-theme" aria-label="Basculer thème">
+          <img src="assets/icons/dark-32-gris.png" alt="Dark">
+        </button>
       </div>
     </div>
 
@@ -34,19 +40,15 @@
       <h3>Classement final</h3>
     </div>
   </div>
+  </main>
 
-  <nav class="bottom-nav" aria-label="Navigation de la partie">
-    <a href="tableau_scores.html" class="unactive-nav-bar" aria-label="Tableau">
-      <img src="assets/icons/table-32-gris.png" alt="Tableau">
-    </a>
-    <a href="saisie_scores.html" class="unactive-nav-bar" aria-label="Saisie">
-      <img src="assets/icons/edit-32-gris.png" alt="Saisie">
-    </a>
-    <a href="statistiques.html" class="active-nav-bar" aria-label="Stats">
-      <img src="assets/icons/chart-32-beige.png" alt="Stats">
-    </a>
-  </nav>
 
-  <script src="statistiques.js"></script>
+  <nav id="navbar"></nav>
+  <script src="js/main.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/darkmode.js"></script>
+  <script src="js/header.js"></script>
+  <script src="js/navbar.js"></script>
+  <script src="js/pages/statistiques.js"></script>
 </body>
 </html>

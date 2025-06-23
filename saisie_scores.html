@@ -1,50 +1,50 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1.0">
-  <title>Saisie des Scores - Master Score</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="saisie_scores.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Saisie Scores</title>
+  <script>
+    (() => {
+      const theme = localStorage.getItem("theme") || "light";
+      document.documentElement.classList.add(theme);
+    })();
+  </script>
+
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/header.css" />
+  <link rel="stylesheet" href="css/navbar.css" />
+  <link rel="stylesheet" href="css/pages/saisie_scores.css" />
 </head>
 <body>
-  <header class="titre">
-    <!-- Flèche “Retour” (cachée par défaut) -->
-    <a href="historique.html" class="back-link" style="display:none" aria-label="Retour">
-      <img src="assets/icons/back-32.png" alt="Retour">
-    </a>
-    <!-- Home classique -->
-    <a href="index.html" class="home-link" aria-label="Accueil">
-      <img src="assets/icons/menu-32-beige.png" alt="Accueil">
-    </a>
-    <h1>Saisie des Scores</h1>
-  </header>
+  <header id="header"></header>
+  
+  <main style="padding-bottom: 100px;">
+    <div class="tool-box">
+      <a class="tool-box-buttons" id="prev-turn">Tour Précédent</a>
+      <div class="tool-box-center">
+        <a>Tour</a>
+        <a>
+          <span id="turn-number">1</span>/<span id="turn-total">1</span>
+        </a>
+      </div>
+      <a class="tool-box-buttons" id="next-turn">Tour Suivant</a>
+      <a class="tool-box-buttons end-button" id="finish-game">
+      <img class="nav-icon" data-icon-name="fin" src="assets/icons/fin-32-beige.png" alt="Fin de Partie" />
+      </a>
+    </div>
 
-  <div class="tool-box">
-    <a class="tool-box-buttons">Tour Précédent</a>
-    <a class="tool-box-buttons">Fin de Partie</a>
-    <a class="tool-box-buttons">Tour Suivant</a>
-  </div>
 
-  <div class="current-turn">
-    Tour <span id="turn-number">1</span> / <span id="turn-total">1</span>
-  </div>
-
-  <!-- Section contenant les cases de saisie par joueur -->
-  <div class="saisie-des-scores-section"></div>
-
-  <nav class="bottom-nav" aria-label="Navigation de la partie">
-    <a href="tableau_scores.html" class="unactive-nav-bar" aria-label="Tableau des scores">
-      <img src="assets/icons/table-32-gris.png" alt="Tableau">
-    </a>
-    <a href="saisie_scores.html" class="active-nav-bar" aria-label="Saisie des scores">
-      <img src="assets/icons/edit-32-beige.png" alt="Saisie">
-    </a>
-    <a href="statistiques.html" class="unactive-nav-bar" aria-label="Statistiques">
-      <img src="assets/icons/chart-32-gris.png" alt="Stats">
-    </a>
-  </nav>
-
-  <script src="saisie_scores.js"></script>
+    <!-- Section contenant les cases de saisie par joueur -->
+    <div class="saisie-des-scores-section"></div>
+  </main>
+  
+  <nav id="navbar"></nav>
+  <script src="js/main.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/darkmode.js"></script>
+  <script src="js/header.js"></script>
+  <script src="js/navbar.js"></script>
+  <script src="js/pages/saisie_scores.js"></script>
 </body>
 </html>

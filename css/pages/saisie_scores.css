@@ -1,0 +1,158 @@
+/* Styles spécifiques à la page saisie_scores */
+
+.tool-box {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px;
+  gap: 10px;
+}
+
+.tool-box-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--fond-bouton);
+  color: var(--texte-bouton);
+  padding: 10px;
+  width: auto;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.tool-box-buttons:hover {
+  color: var(--texte-bouton);
+  background: #D38439;
+}
+
+/* État désactivé pour un bouton */
+.tool-box-buttons.disabled-btn {
+  opacity: 0.5;
+  cursor: default;
+}
+.tool-box-buttons.disabled-btn:hover {
+  background: var(--rouge);
+}
+
+.tool-box-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0.5rem;
+    font-size: 1.2rem;
+    color: var(--texte-principal);
+}
+
+@media (max-width: 600px) {
+  
+  .tool-box-buttons {
+    justify-content: center;
+    margin-bottom: 10px;
+  }
+  .tool-box-center {
+    flex-direction: column;
+  }
+}
+
+.saisie-des-scores-section {
+  display: grid;
+  gap: 20px;
+  margin: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+.saisie-des-scores-box {
+  display: flex;
+  flex-direction: column;
+  background: var(--fond-bouton);
+  border-radius: 20px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.4);
+  overflow: hidden;
+}
+
+.saisie-des-scores-box-header {
+  text-align: center;
+  font-size: 30px;
+  font-weight: 600;
+  color: var(--texte-bouton);
+  padding: 10px 0;
+  background: var(--fond-bouton);
+}
+
+.saisie-des-scores-box-body {
+  display: flex;
+  padding: 20px;
+  gap: 10px;
+}
+
+.saisie-des-scores-box-left {
+  flex: 4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.saisie-des-scores-box-left input.sdsbl-input-score {
+  width: 80%;
+  text-align: center;
+  font-size: 2.5rem; /* Taille du score principale */
+  font-weight: 700;
+  background: var(--fond-principal);
+  color: var(--texte-principal);
+  border: none;
+  border-radius: 15px;
+  height: 3.5rem;
+}
+
+.saisie-des-scores-box-left .sdsbl-total {
+  margin-top: 10px;
+  font-size: 1rem; /* Taille du texte "Total :" */
+  font-weight: 600;
+  color: var(--texte-bouton);
+}
+
+.saisie-des-scores-box-left .sdsbl-total-score {
+  font-size: 1.5rem; /* Taille du score total */
+  font-weight: 700;
+  margin-left: 5px;
+}
+
+.saisie-des-scores-box-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+}
+
+.saisie-des-scores-box-right a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--orange-pale);
+  color: var(--texte-bouton);
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 8px;
+  text-decoration: none;
+}
+
+
+/* Animations de slide (pour Tour Suivant) */
+@keyframes slide-out-left   { to { transform: translateX(-100%); } }
+@keyframes slide-in-right   { from { transform: translateX(100%); } to { transform: translateX(0); } }
+@keyframes slide-out-right  { to { transform: translateX(100%); } }
+@keyframes slide-in-left    { from { transform: translateX(-100%); } to { transform: translateX(0); } }
+
+.saisie-des-scores-section.slide-out-left   { animation: slide-out-left  0.15s ease forwards; }
+.saisie-des-scores-section.slide-in-right   { animation: slide-in-right  0.15s ease forwards; }
+.saisie-des-scores-section.slide-out-right  { animation: slide-out-right 0.15s ease forwards; }
+.saisie-des-scores-section.slide-in-left    { animation: slide-in-left   0.15s ease forwards; }
+
+.main {
+  display: flex;
+}

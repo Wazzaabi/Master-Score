@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Parametres Partie</title>
+  <script>
+    (() => {
+      const theme = localStorage.getItem("theme") || "light";
+      document.documentElement.classList.add(theme);
+    })();
+  </script>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/header.css" />
+  <link rel="stylesheet" href="css/navbar.css" />
+  <link rel="stylesheet" href="css/pages/parametres_partie.css" />
+</head>
+<body>
+  <header id="header"></header>
+  <main>
+    <div class="box">
+    <label for="nbr-players">Nombre de joueurs :</label>
+    <div class="nbr-players">
+      <button id="decr-player"><img class="nav-icon" src="assets/icons/minus-32-gris.png" alt="Moins"></button>
+      <span id="nbr-players">1</span>
+      <button id="incr-player"><img class="nav-icon" src="assets/icons/plus-32-gris.png" alt="Plus"></button>
+    </div>
+  </div>
+
+  <div class="box" id="players-names"></div>
+
+  <div>
+    <button id="start-game" class="simple-button">Commencer la Partie</button>
+  </div>
+
+
+  <div id="alert-overlay" class="overlay hidden">
+    <div class="custom-alert box">
+      <p id="alert-message">Message</p>
+      <div style="margin-top: 1rem; display: flex; justify-content: center; gap: 1rem;">
+        <button class="simple-button" id="alert-confirm">Continuer</button>
+        <button class="simple-button" id="alert-cancel">Annuler</button>
+      </div>
+    </div>
+  </div>
+  <script src="alertManager.js"></script>
+
+  </main>
+  <nav id="navbar"></nav>
+  <script src="js/main.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/darkmode.js"></script>
+  <script src="js/header.js"></script>
+  <script src="js/navbar.js"></script>
+  <script src="js/pages/parametres_partie.js"></script>
+</body>
+</html>
